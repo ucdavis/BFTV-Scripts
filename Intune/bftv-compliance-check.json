@@ -1,0 +1,32 @@
+{
+    "Rules": [
+        {
+            "SettingName": "BIOS_PW",
+            "Operator": "IsEquals",
+            "DataType": "Boolean",
+            "Operand": true,
+            "MoreInfoUrl": "https://kb.ucdavis.edu",
+            "RemediationStrings": [
+                {
+                    "Language": "en_US",
+                    "Title": "This device lacks a BIOS Password.",
+                    "Description": "You have to add a BIOS password"
+                }
+            ]
+        },
+        { 
+            "SettingName":"DetectBigFix",
+            "Operator":"IsEquals",
+            "DataType":"String",
+            "Operand":"Detected",
+            "MoreInfoUrl":"https://kb.ucdavis.edu",
+            "RemediationStrings": [ 
+                { 
+                    "Language": "en_US",
+                    "Title": "BigFix Client Missing",
+                    "Description": "The BigFix is missing on your device."
+                }
+            ]
+        }
+    ]
+}
