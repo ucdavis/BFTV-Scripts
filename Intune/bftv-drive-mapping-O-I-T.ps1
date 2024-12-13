@@ -299,7 +299,7 @@ if (Test-RunningAsSystem) {
 	$schtaskDescription = "Map network drives from intune-drive-mapping-generator."
 
 	$trigger = New-ScheduledTaskTrigger -AtLogOn
-	$class = cimclass MSFT_TaskEventTrigger root/Microsoft/Windows/TaskScheduler
+	$class = Get-CimClass MSFT_TaskEventTrigger root/Microsoft/Windows/TaskScheduler
 
 	$trigger2 = $class | New-CimInstance -ClientOnly
 	$trigger2.Enabled = $True
