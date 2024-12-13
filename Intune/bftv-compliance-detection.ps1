@@ -8,7 +8,7 @@ if ($BIOS_test)
 
 # Check if BigFix is Installed
 $InstalledSoftware = Get-ItemProperty HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*
-if ($InstalledSoftware -like "*BigFix Client*") {
+if ($InstalledSoftware.DisplayName -like "BigFix Client") {
 	$DetectBigFix = "Detected"
 }
 else {
