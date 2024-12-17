@@ -6,21 +6,21 @@ $global:browser = "firefox"
 
 # Define a list of search actions as a set of templates.
 $stepTemplates = @(
-    @{ TextTemplate = 'Search for what $productName is/does/provides'; SearchPattern = 'what is "$productName"' },
-    @{ TextTemplate = 'Search for if $productName is local or cloud'; SearchPattern = 'is "$productName" local or cloud based' },
-    @{ TextTemplate = 'Search for if $productName is a one-time purchase or subscription'; SearchPattern = 'is "$productName" one time or subscription' }, 
-    @{ TextTemplate = 'Search for "$productName litigation, lawsuit, vulnerability"'; SearchPattern = '"$productName" AND ("litigation" OR "lawsuit" OR vulnerability)' },
-    @{ TextTemplate = 'Search for "$productName breach"'; SearchPattern = '"$productName" "breach"' },
-    @{ TextTemplate = 'Search for "$productName main website"'; SearchPattern = '"$productName" main website' },
-    @{ TextTemplate = 'Search for "$productName security section" (Not Privacy Policy)'; SearchPattern = '"$productName" security page' },
-    @{ TextTemplate = 'Search for "$productName Public Notification section"'; SearchPattern = '"$productName" AND ("release notes" OR "blog" or "notices")' },
-    @{ TextTemplate = 'Search for "$productName headquarters"'; SearchPattern = 'where is "$productName" headquarters' },
-    @{ TextTemplate = 'Search for "$productName other offices"'; SearchPattern = 'where are other "$productName" offices' },
-    @{ TextTemplate = 'Search for "$productName employee locations"'; SearchPattern = 'whare are most "$productName" employees located' },
-    @{ TextTemplate = 'Search for "$productName prohibited use"'; SearchPattern = '"$productName" AND (prohibited)' },
-    @{ TextTemplate = 'Search for "$productName and Kaspersky"'; SearchPattern = '"$productName" AND "kaspersky"' },
-    @{ TextTemplate = 'Search for "$productName open source"'; SearchPattern = 'is "$productName" open source' },
-    @{ TextTemplate = 'Search for "$productName and MOVEit"'; SearchPattern = '"$productName" AND "MOVEit"' }
+    @{ TextTemplate = 'Search for what $productName is/does/provides'; SearchPattern = 'what is "$productName"'; CustomURL = $null },
+    @{ TextTemplate = 'Search for if $productName is local or cloud'; SearchPattern = 'is "$productName" local or cloud based'; CustomURL = $null },
+    @{ TextTemplate = 'Search for if $productName is a one-time purchase or subscription'; SearchPattern = 'is "$productName" one time or subscription'; CustomURL = $null }, 
+    @{ TextTemplate = 'Search for "$productName litigation, lawsuit, vulnerability"'; SearchPattern = '"$productName" AND ("litigation" OR "lawsuit" OR vulnerability)'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName breach"'; SearchPattern = '"$productName" "breach"'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName" in Attorney Generals website'; SearchPattern = '"$productName" AND "MOVEit"'; CustomURL = 'https://oag.ca.gov/privacy/databreach/list?field_sb24_org_name_value=$productName' },
+    @{ TextTemplate = 'Search for "$productName main website"'; SearchPattern = '"$productName" main website'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName security section" (Not Privacy Policy)'; SearchPattern = '"$productName" security page'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName Public Notification section"'; SearchPattern = '"$productName" AND ("release notes" OR "blog" or "notices")'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName headquarters"'; SearchPattern = 'where is "$productName" headquarters'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName other offices"'; SearchPattern = 'where are other "$productName" offices'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName employee locations"'; SearchPattern = 'where are most "$productName" employees located'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName prohibited use"'; SearchPattern = '"$productName" AND (prohibited)'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName and Kaspersky"'; SearchPattern = '"$productName" AND "kaspersky"'; CustomURL = $null },
+    @{ TextTemplate = 'Search for "$productName open source"'; SearchPattern = 'is "$productName" open source'; CustomURL = $null }
 )
 
 # Function to generate steps based on the templates
@@ -36,10 +36,12 @@ function Get-Steps {
         $step = $stepTemplates[$i]
         $stepText = $step.TextTemplate -replace '\$productName', $productName
         $stepQuery = $step.SearchPattern -replace '\$productName', $productName
+        $stepURL = $step.CustomURL -replace '\$productName', $productName
 
         $steps += @{
             Text = "Step $($i + 1): $stepText"
             SearchQuery = $stepQuery
+            CustomURL = $stepURL
         }
     }
 
@@ -118,8 +120,29 @@ $searchButton.Location = New-Object System.Drawing.Point(125, 170)  # Adjusted f
 $searchButton.Add_Click({
     # Access the correct current step and search query
     $query = $global:steps[$global:currentStep].SearchQuery
-    if ($query) {
-        # Properly encode the query to handle special characters
+    $customURL = $global:steps[$global:currentStep].CustomURL
+
+    if ($customURL) {
+
+        # Check the specified browser and open the URL accordingly
+        switch ($global:browser.ToLower()) {
+            "chrome" {
+                Start-Process "chrome.exe" -ArgumentList $customURL
+            }
+            "firefox" {
+                Start-Process "firefox.exe" -ArgumentList $customURL
+            }
+            "edge" {
+                Start-Process "msedge.exe" -ArgumentList $customURL
+            }
+            default {
+                Start-Process $customURL
+            }
+        }
+    }
+
+    elseif ($query) {
+        # If no custom URL is provided, search using Google
         $encodedQuery = [System.Uri]::EscapeDataString($query)
 
         # Check the specified browser and open the URL accordingly
