@@ -2,13 +2,25 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 # Override Browser (Set to "chrome", "firefox", "edge", or leave empty for default browser)
-$global:browser = ""
+$global:browser = "firefox"
 
 # Define a list of search actions as a set of templates.
 $stepTemplates = @(
-    @{ TextTemplate = 'Search for "$productName litigation"'; SearchPattern = '"$productName" "litigation"' },
-    @{ TextTemplate = 'Search for "$productName headquarters"'; SearchPattern = '"$productName" headquarters' },
-    @{ TextTemplate = 'Search for "$productName employees"'; SearchPattern = '"$productName" employees' }
+    @{ TextTemplate = 'Search for what $productName is/does/provides'; SearchPattern = 'what is "$productName"' },
+    @{ TextTemplate = 'Search for if $productName is local or cloud'; SearchPattern = 'is "$productName" local or cloud based' },
+    @{ TextTemplate = 'Search for if $productName is a one-time purchase or subscription'; SearchPattern = 'is "$productName" one time or subscription' }, 
+    @{ TextTemplate = 'Search for "$productName litigation, lawsuit, vulnerability"'; SearchPattern = '"$productName" AND ("litigation" OR "lawsuit" OR vulnerability)' },
+    @{ TextTemplate = 'Search for "$productName breach"'; SearchPattern = '"$productName" "breach"' },
+    @{ TextTemplate = 'Search for "$productName main website"'; SearchPattern = '"$productName" main website' },
+    @{ TextTemplate = 'Search for "$productName security section" (Not Privacy Policy)'; SearchPattern = '"$productName" security page' },
+    @{ TextTemplate = 'Search for "$productName Public Notification section"'; SearchPattern = '"$productName" AND ("release notes" OR "blog" or "notices")' },
+    @{ TextTemplate = 'Search for "$productName headquarters"'; SearchPattern = 'where is "$productName" headquarters' },
+    @{ TextTemplate = 'Search for "$productName other offices"'; SearchPattern = 'where are other "$productName" offices' },
+    @{ TextTemplate = 'Search for "$productName employee locations"'; SearchPattern = 'whare are most "$productName" employees located' },
+    @{ TextTemplate = 'Search for "$productName prohibited use"'; SearchPattern = '"$productName" AND (prohibited)' },
+    @{ TextTemplate = 'Search for "$productName and Kaspersky"'; SearchPattern = '"$productName" AND "kaspersky"' },
+    @{ TextTemplate = 'Search for "$productName open source"'; SearchPattern = 'is "$productName" open source' },
+    @{ TextTemplate = 'Search for "$productName and MOVEit"'; SearchPattern = '"$productName" AND "MOVEit"' }
 )
 
 # Function to generate steps based on the templates
