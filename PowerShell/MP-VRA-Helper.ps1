@@ -11,26 +11,132 @@ $global:productURL = ""  # Default empty value for product name
 
 # Define a list of search actions as a set of templates.
 $stepTemplates = @(
-    @{ SectionText = 'Search for what $productName is/does/provides'; SearchPattern = 'what is "$productName"'; CustomURL = $null },
-    @{ SectionText = 'Search for if $productName is local or cloud'; SearchPattern = 'is "$productName" local or cloud based'; CustomURL = $null },
-    @{ SectionText = 'Search for if $productName is a one-time purchase or subscription'; SearchPattern = 'is "$productName" one time or subscription'; CustomURL = $null }, 
-    @{ SectionText = 'Search for "$productName litigation, lawsuit, vulnerability"'; SearchPattern = '"$productName" AND ("litigation" OR "lawsuit" OR vulnerability)'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName breach"'; SearchPattern = '"$productName" "breach"'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName" in Attorney Generals website'; SearchPattern = ''; CustomURL = 'https://oag.ca.gov/privacy/databreach/list?field_sb24_org_name_value=$productName' },
-    @{ SectionText = 'Search for "$productName" on FedRAMP'; SearchPattern = ''; CustomURL = 'https://marketplace.fedramp.gov/products' },
-    @{ SectionText = 'Search for "$productName main website"'; SearchPattern = '"$productName" main website'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName security section" (Not Privacy Policy)'; SearchPattern = '"$productName" security page'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName Public Notification section"'; SearchPattern = '"$productName" AND ("release notes" OR "blog" or "notices")'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName headquarters"'; SearchPattern = 'where is "$productName" headquarters'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName other offices"'; SearchPattern = 'where are other "$productName" offices'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName employee locations"'; SearchPattern = 'where are most "$productName" employees located'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productURL" on SSL Labs Scan'; SearchPattern = ''; CustomURL = 'https://www.ssllabs.com/ssltest/analyze.html?d=$productURL' },
-    @{ SectionText = 'Search for "$productName" on Bug Bounty'; SearchPattern = ''; CustomURL = 'https://www.openbugbounty.org/search/' },
-    @{ SectionText = 'Search for "$productName" on CVE Details'; SearchPattern = ''; CustomURL = 'https://www.cvedetails.com/' },
-    @{ SectionText = 'Search for "$productName prohibited use"'; SearchPattern = '"$productName" AND (prohibited)'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName and Kaspersky"'; SearchPattern = '"$productName" AND "kaspersky"'; CustomURL = $null },
-    @{ SectionText = 'Search for "$productName open source"'; SearchPattern = ''; CustomURL = "https://osv.dev/list?q=$productName" },
-    @{ SectionText = 'Search for "$productName" on BitSight'; SearchPattern = ''; CustomURL = "https://service.bitsighttech.com/sso/university-of-california-davis-1:UCD/" }
+    @{ 
+        SectionLabel = 'Description of Vendor';
+        SectionText = 'Search for what $productName is/does/provides';
+        SearchPattern = 'what is "$productName"';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = 'Type of Service Implementation';
+        SectionText = 'Search for if $productName is local or cloud';
+        SearchPattern = 'is "$productName" local or cloud based';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = 'Type of Service Implementation';
+        SectionText = 'Search for if $productName is a one-time purchase or subscription';
+        SearchPattern = 'is "$productName" one time or subscription';
+        CustomURL = $null 
+    }, 
+    @{ 
+        SectionLabel = 'General Internet Search';
+        SectionText = 'Search for "$productName litigation, lawsuit, vulnerability"';
+        SearchPattern = '"$productName" AND ("litigation" OR "lawsuit" OR vulnerability)';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = 'Evidence of Past Breaches';
+        SectionText = 'Search for "$productName breach"';
+        SearchPattern = '"$productName" "breach"';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = "California Attorney General's website";
+        SectionText = 'Search for "$productName" in Attorney Generals website';
+        SearchPattern = '';
+        CustomURL = 'https://oag.ca.gov/privacy/databreach/list?field_sb24_org_name_value=$productName' 
+    },
+    @{ 
+        SectionLabel = 'FedRAMP Marketplace';
+        SectionText = 'Search for "$productName" on FedRAMP';
+        SearchPattern = '';
+        CustomURL = 'https://marketplace.fedramp.gov/products' 
+    },
+    @{ 
+        SectionLabel = "Vendor's Website";
+        SectionText = 'Search for "$productName main website"';
+        SearchPattern = '"$productName" main website';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = "Vendor's Website";
+        SectionText = 'Search for "$productName security section" (Not Privacy Policy)';
+        SearchPattern = '"$productName" security page';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = "Vendor's Website";
+        SectionText = 'Search for "$productName Public Notification section"';
+        SearchPattern = '"$productName" AND ("release notes" OR "blog" or "notices")';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = "Vendor's Website";
+        SectionText = 'Search for "$productName headquarters"';
+        SearchPattern = 'where is "$productName" headquarters';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = "Vendor's Website";
+        SectionText = 'Search for "$productName other offices"';
+        SearchPattern = 'where are other "$productName" offices';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = "Vendor's Website";
+        SectionText = 'Search for "$productName employee locations"';
+        SearchPattern = 'where are most "$productName" employees located';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = 'Qualys SSL Labs Scan';
+        SectionText = 'Search for "$productURL" on SSL Labs Scan';
+        SearchPattern = '';
+        CustomURL = 'https://www.ssllabs.com/ssltest/analyze.html?d=$productURL' 
+    },
+    @{ 
+        SectionLabel = 'Bug Bounty';
+        SectionText = 'Search for "$productName" on Bug Bounty';
+        SearchPattern = '';
+        CustomURL = 'https://www.openbugbounty.org/search/' 
+    },
+    @{ 
+        SectionLabel = 'CVE Details on Vendor and Service/Product';
+        SectionText = 'Search for "$productName" on CVE Details';
+        SearchPattern = '';
+        CustomURL = 'https://www.cvedetails.com/' 
+    },
+    @{ 
+        SectionLabel = 'Prohibited Services/Products/Use';
+        SectionText = 'Search for "$productName prohibited use"';
+        SearchPattern = '"$productName" AND (prohibited)';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = 'Prohibited Services/Products/Use';
+        SectionText = 'Search for "$productName and Kaspersky"';
+        SearchPattern = '"$productName" AND "kaspersky"';
+        CustomURL = $null 
+    },
+    @{ 
+        SectionLabel = 'Open Source Vulnerability (OSV) Database';
+        SectionText = 'Search for "$productName open source"';
+        SearchPattern = '';
+        CustomURL = "https://osv.dev/list?q=$productName" 
+    },
+    @{ 
+        SectionLabel = 'Third-party Evaluation(s)';
+        SectionText = 'Search for "$productName" on BitSight';
+        SearchPattern = '';
+        CustomURL = "https://service.bitsighttech.com/sso/university-of-california-davis-1:UCD/" 
+    },
+    @{ 
+        SectionLabel = 'MOVEit vulnerability';
+        SectionText = 'Search for "$productName and MOVEit"';
+        SearchPattern = '"$productName" AND "MOVEit"';
+        CustomURL = $null 
+    }
 )
 
 # Function to generate steps based on the templates
@@ -52,7 +158,9 @@ function Get-Steps {
         $stepURL = $step.CustomURL -replace '\$productName', $productName -replace '\$productURL', $productURL
 
         $steps += @{
-            Text = "Step $($i + 1): $stepText"
+            #Text = "Step $($i + 1): $stepText"  #To add step number
+            SectionLabel = $step.SectionLabel
+            Text = $stepText
             SearchQuery = $stepQuery
             CustomURL = $stepURL
         }
@@ -66,8 +174,13 @@ $global:steps = Get-Steps -productName $global:productName -productURL $global:p
 
 # Function to Update UI State
 function Update-StepUI {
+    # Update SectionLabel with the current step's label
+    $sectionLabel.Text = $global:steps[$global:currentStep].SectionLabel
+
+    # Update the main step text
     $label.Text = $global:steps[$global:currentStep].Text
-    # Enable/Disable buttons based on the current step
+
+    # Enable/Disable navigation buttons
     $backButton.Enabled = $global:currentStep -gt 0
     $nextButton.Enabled = $global:currentStep -lt ($global:steps.Count - 1)
 }
@@ -119,12 +232,20 @@ $productURLTextBox.Add_TextChanged({
 })
 $form.Controls.Add($productURLTextBox)
 
+# Create the Label for SectionLabel (centered above step text)
+$sectionLabel = New-Object System.Windows.Forms.Label
+$sectionLabel.Size = New-Object System.Drawing.Size(400, 30)  # Adjusted size for description text
+$sectionLabel.Location = New-Object System.Drawing.Point(25, 60)  # Positioned above the SectionText label
+$sectionLabel.TextAlign = "MiddleCenter"  # Center align the text
+$sectionLabel.Font = New-Object System.Drawing.Font("Arial", 12, [System.Drawing.FontStyle]::Bold)
+$form.Controls.Add($sectionLabel)
+
 # Create the Label for step text (centered)
 $label = New-Object System.Windows.Forms.Label
 $label.Size = New-Object System.Drawing.Size(400, 50)
-$label.Location = New-Object System.Drawing.Point(25, 75)  # Adjusted to leave space for TextBox
+$label.Location = New-Object System.Drawing.Point(25, 90)  # Adjusted to leave space for TextBox
 $label.TextAlign = "MiddleCenter"
-$label.Font = New-Object System.Drawing.Font("Arial", 12)
+$label.Font = New-Object System.Drawing.Font("Arial", 11)
 $form.Controls.Add($label)
 
 # Create the Back Button
