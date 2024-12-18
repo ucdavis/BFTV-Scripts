@@ -13,32 +13,32 @@ $global:productURL = ""  # Default empty value for product name
 $stepTemplates = @(
     @{ 
         SectionLabel = 'Description of Vendor';
-        SectionText = 'Search for what $productName is/does/provides';
+        SectionText = 'Search for description of what "$productName" is/does/provides' ;
         SearchPattern = 'what is "$productName"';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = 'Type of Service Implementation';
-        SectionText = 'Search for if $productName is local or cloud';
-        SearchPattern = 'is "$productName" local or cloud based';
+        SectionText = 'Search for if "$productName" is cloud based';
+        SearchPattern = 'is "$productName" cloud based';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = 'Type of Service Implementation';
-        SectionText = 'Search for if $productName is a one-time purchase or subscription';
-        SearchPattern = 'is "$productName" one time or subscription';
+        SectionText = 'Search for if "$productName" is subscription only';
+        SearchPattern = 'is "$productName" subscription only';
         CustomURL = $null 
     }, 
     @{ 
         SectionLabel = 'General Internet Search';
-        SectionText = 'Search for "$productName litigation, lawsuit, vulnerability"';
+        SectionText = 'Search for "$productName + litigation, lawsuit, vulnerability"';
         SearchPattern = '"$productName" AND ("litigation" OR "lawsuit" OR vulnerability)';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = 'Evidence of Past Breaches';
-        SectionText = 'Search for "$productName breach"';
-        SearchPattern = '"$productName" "breach"';
+        SectionText = 'Search for "$productName + breach"';
+        SearchPattern = '"$productName" AND "breach"';
         CustomURL = $null 
     },
     @{ 
@@ -49,43 +49,43 @@ $stepTemplates = @(
     },
     @{ 
         SectionLabel = 'FedRAMP Marketplace';
-        SectionText = 'Search for "$productName" on FedRAMP';
+        SectionText = 'Search for "$productName" on FedRAMP. Note: Scroll down to type name in "Search Marketplace" section. ';
         SearchPattern = '';
         CustomURL = 'https://marketplace.fedramp.gov/products' 
     },
     @{ 
         SectionLabel = "Vendor's Website";
-        SectionText = 'Search for "$productName main website"';
+        SectionText = 'Search for "$productName" main website, if it is not "$productURL"';
         SearchPattern = '"$productName" main website';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = "Vendor's Website";
-        SectionText = 'Search for "$productName security section" (Not Privacy Policy)';
+        SectionText = 'Search for "$productName" security section. Note: Do not use Privacy Policy.';
         SearchPattern = '"$productName" security page';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = "Vendor's Website";
-        SectionText = 'Search for "$productName Public Notification section"';
+        SectionText = 'Search for "$productName" Public Notification section';
         SearchPattern = '"$productName" AND ("release notes" OR "blog" or "notices")';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = "Vendor's Website";
-        SectionText = 'Search for "$productName headquarters"';
+        SectionText = 'Search for "$productName" headquarters';
         SearchPattern = 'where is "$productName" headquarters';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = "Vendor's Website";
-        SectionText = 'Search for "$productName other offices"';
+        SectionText = 'Search for "$productName" other offices';
         SearchPattern = 'where are other "$productName" offices';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = "Vendor's Website";
-        SectionText = 'Search for "$productName employee locations"';
+        SectionText = 'Search for "$productName" employee locations';
         SearchPattern = 'where are most "$productName" employees located';
         CustomURL = $null 
     },
@@ -97,43 +97,43 @@ $stepTemplates = @(
     },
     @{ 
         SectionLabel = 'Bug Bounty';
-        SectionText = 'Search for "$productName" on Bug Bounty';
+        SectionText = 'Search for "$productURL" on Bug Bounty';
         SearchPattern = '';
-        CustomURL = 'https://www.openbugbounty.org/search/' 
+        CustomURL = 'https://www.openbugbounty.org/search/?search=$productURL' 
     },
     @{ 
         SectionLabel = 'CVE Details on Vendor and Service/Product';
-        SectionText = 'Search for "$productName" on CVE Details';
+        SectionText = 'Search for "$productName" on CVE Details. Note: Use the serchbar at the top of page.';
         SearchPattern = '';
         CustomURL = 'https://www.cvedetails.com/' 
     },
     @{ 
         SectionLabel = 'Prohibited Services/Products/Use';
-        SectionText = 'Search for "$productName prohibited use"';
+        SectionText = 'Search for "$productName + prohibited"';
         SearchPattern = '"$productName" AND (prohibited)';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = 'Prohibited Services/Products/Use';
-        SectionText = 'Search for "$productName and Kaspersky"';
+        SectionText = 'Search for "$productName + Kaspersky"';
         SearchPattern = '"$productName" AND "kaspersky"';
         CustomURL = $null 
     },
     @{ 
         SectionLabel = 'Open Source Vulnerability (OSV) Database';
-        SectionText = 'Search for "$productName open source"';
+        SectionText = 'Search for "$productName" in Open Source Vulnerability (OSV) Database';
         SearchPattern = '';
-        CustomURL = "https://osv.dev/list?q=$productName" 
+        CustomURL = 'https://osv.dev/list?q=$productName'; 
     },
     @{ 
         SectionLabel = 'Third-party Evaluation(s)';
-        SectionText = 'Search for "$productName" on BitSight';
+        SectionText = 'Search for "$productName" or "$productURL" on BitSight';
         SearchPattern = '';
         CustomURL = "https://service.bitsighttech.com/sso/university-of-california-davis-1:UCD/" 
     },
     @{ 
         SectionLabel = 'MOVEit vulnerability';
-        SectionText = 'Search for "$productName and MOVEit"';
+        SectionText = 'Search for "$productName + MOVEit"';
         SearchPattern = '"$productName" AND "MOVEit"';
         CustomURL = $null 
     }
@@ -245,7 +245,7 @@ $label = New-Object System.Windows.Forms.Label
 $label.Size = New-Object System.Drawing.Size(400, 50)
 $label.Location = New-Object System.Drawing.Point(25, 90)  # Adjusted to leave space for TextBox
 $label.TextAlign = "MiddleCenter"
-$label.Font = New-Object System.Drawing.Font("Arial", 11)
+$label.Font = New-Object System.Drawing.Font("Arial", 12)
 $form.Controls.Add($label)
 
 # Create the Back Button
