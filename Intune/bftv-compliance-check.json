@@ -24,7 +24,21 @@
                 { 
                     "Language": "en_US",
                     "Title": "BigFix Client Missing",
-                    "Description": "The BigFix is missing on your device."
+                    "Description": "The BigFix Client is missing on your device."
+                }
+            ]
+        },
+        { 
+            "SettingName":"DetectTrellix",
+            "Operator":"IsEquals",
+            "DataType":"String",
+            "Operand":"Detected",
+            "MoreInfoUrl":"https://kb.ucdavis.edu",
+            "RemediationStrings": [ 
+                { 
+                    "Language": "en_US",
+                    "Title": "Trellix Client Missing",
+                    "Description": "The Trellix Client is missing on your device."
                 }
             ]
         }
