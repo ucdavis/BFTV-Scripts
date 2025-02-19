@@ -20,7 +20,7 @@ Start-Transcript -Path $(Join-Path $env:temp "AGDT-DriveMapping.log")
 # Input values from generator
 ###########################################################################################
 
-$driveMappingJson = '[{"Path":"\\\\VEN-NAS-NJB.ou.ad3.ucdavis.edu\\JorgensenBambachLabData","DriveLetter":"J","Label":"JorgensenBambachLabData","Id":1,"GroupFilter":"CAES-BFTV-VEN-MG-Lab-USDA-NEJorgensenBambach"}'
+$driveMappingJson = '[{"Path":"\\\\VEN-NAS-NJB.ou.ad3.ucdavis.edu\\JorgensenBambachLabData","DriveLetter":"J","Label":"JorgensenBambachLabData","Id":1,"GroupFilter":"CAES-BFTV-VEN-MG-Lab-USDA-NEJorgensenBambach"}]'
 
 $driveMappingConfig = $driveMappingJson | ConvertFrom-Json -ErrorAction Stop
 #used to create an array for groups
