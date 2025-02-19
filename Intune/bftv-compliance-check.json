@@ -41,6 +41,20 @@
                     "Description": "The Trellix Client is missing on your device."
                 }
             ]
+        },
+        { 
+            "SettingName":"TrellixRunning",
+            "Operator":"IsEquals",
+            "DataType":"String",
+            "Operand":"Trellix service (xagt) is running.",
+            "MoreInfoUrl":"https://kb.ucdavis.edu",
+            "RemediationStrings": [ 
+                { 
+                    "Language": "en_US",
+                    "Title": "Trellix not running.",
+                    "Description": "Trellix service (xagt) is not running."
+                }
+            ]
         }
     ]
 }

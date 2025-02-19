@@ -27,6 +27,15 @@ else {
 	$DetectTrellix = "Not Detected"
 }
 
+# Check if Trellix is Running
+$TrellixService = Get-Service -Name xagt
+if ($TrellixService.Status -eq 'Running') {
+    $TrellixRunning = "Trellix service (xagt) is running."
+} else {
+    $TrellixRunning = "Trellix service (xagt) is not running."
+}
+
+
 # Output variables
-$output = @{ BIOS_PW = $BIOS_PW; DetectBigFix = $DetectBigFix; DetectTrellix = $DetectTrellix}
+$output = @{ BIOS_PW = $BIOS_PW; DetectBigFix = $DetectBigFix; DetectTrellix = $DetectTrellix; TrellixRunning = $TrellixRunning}
 return $output | ConvertTo-Json -Compress
