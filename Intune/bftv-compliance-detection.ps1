@@ -29,10 +29,10 @@ else {
 
 # Check if Trellix is Running
 $TrellixService = Get-Service -Name xagt
-if ($TrellixService.Status -eq 'Running') {
-    $TrellixRunning = "Trellix service (xagt) is running."
+if ($TrellixService.Status -eq "Running") {
+    $TrellixRunning = "Running"
 } else {
-    $TrellixRunning = "Trellix service (xagt) is not running."
+    $TrellixRunning = "Not Running"
 }
 
 

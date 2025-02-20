@@ -46,7 +46,7 @@
             "SettingName":"TrellixRunning",
             "Operator":"IsEquals",
             "DataType":"String",
-            "Operand":"Trellix service (xagt) is running.",
+            "Operand":"Running",
             "MoreInfoUrl":"https://kb.ucdavis.edu",
             "RemediationStrings": [ 
                 { 
